@@ -136,5 +136,14 @@ djvi() {
     fi
 }
 
+# --- ZLE & Keybinding Setup ---
+
 # Register `djvi` as a Zsh Line Editor (zle) widget
 zle -N djvi-widget djvi
+
+# Check if the widget is already bound to a key.
+# If not, set our default `Ctrl+F`.
+# Users can override this in their .zshrc if they want a different key.
+if ! bindkey -L | grep -q "djvi-widget"; then
+    bindkey '^F' djvi-widget
+fi

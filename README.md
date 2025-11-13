@@ -4,14 +4,15 @@
 
 A Zsh plugin that logs and retrieves command history based on the directory it was run in. Never forget that complex `docker` or `git` command you ran in a project folder weeks ago.
 
-!
+
 
 ## Features
 
 * **Logs commands with their directory:** Silently in the background.
 * **`djvu`**: A command to show history for the **current directory**, just like `history`.
 * **`djvu <path>`**: Lets you query the history for **any directory**.
-* **`djvi`**: An interactive **fuzzy finder** (using `fzf`) to search your *entire* directory history and bring the command back to your prompt.
+* **`djvi`**: An interactive **fuzzy finder** (using `fzf`) to search your *entire* directory history.
+* **Automatic Keybinding:** Binds `Ctrl+F` to the interactive search out of the box.
 
 ## Installation
 
@@ -74,22 +75,21 @@ A Zsh plugin that logs and retrieves command history based on the directory it w
          2  ls
     ```
 
-### 2. Interactive Search (`djvi` & Keybinding)
+### 2. Interactive Search (`djvi`)
 
-This is the killer feature. The plugin provides a `djvi-widget` for Zsh. To use it, you need to bind it to a key in your `~/.zshrc`.
+The plugin automatically binds `djvi` to `Ctrl+F`.
 
-**We recommend `Alt+R` (or `Option+R` on Mac).**
+Just press **`Ctrl+F`** to open the interactive fuzzy finder ("F" for "Find"). You can type to filter all commands from all directories.
 
-Add this line to your `~/.zshrc`:
+#### Overriding the Keybinding
 
+If you want to use a different key (like `Ctrl+R` to replace the default), just add your own `bindkey` command to your `~/.zshrc` file. Make sure to place it *after* your plugins are loaded. Your setting will override the default.
+
+Example: to bind `Ctrl+R`:
 ```zsh
-# Binds Alt+R to the Deja Vu Interactive search
-bindkey '^[r' djvi-widget
+# Put this in your ~/.zshrc (after the 'plugins=' line)
+bindkey '^R' djvi-widget
 ```
-
-(You *can* bind it to `Ctrl+R` with `bindkey '^R' djvi-widget`, but this will override Zsh's default reverse-search. `Alt+R` is a safe, common alternative.)
-
-Now, whenever you press `Alt+R`, `fzf` will open. You can type `projects` to see commands from your projects folder, then type `docker` to narrow it down, all in one search.
 
 ### Customization
 
