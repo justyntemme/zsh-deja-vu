@@ -47,8 +47,8 @@ add-zsh-hook preexec _zsh_deja_vu_preexec
 ##
 djvu() {
     if [[ ! -f "$ZSH_DEJA_VU_HISTORY_FILE" ]]; then
-        print "zsh-deja-vu: No history logged yet."
-        print "Run a few commands to populate $ZSH_DEJA_VU_HISTORY_FILE"
+        printf "%s\n" "zsh-deja-vu: No history logged yet."
+        printf "%s\n" "Run a few commands to populate $ZSH_DEJA_VU_HISTORY_FILE"
         return 1
     fi
 
@@ -58,7 +58,7 @@ djvu() {
     if [[ -n "$1" ]]; then
         # User provided a path.
         if [[ ! -d "$1" ]]; then
-             print "djvu: error: directory not found: $1"
+             printf "djvu: error: directory not found: %s\n" "$1"
              return 1
         fi
         # ":A" is Zsh magic to resolve to an absolute, real path
@@ -81,15 +81,10 @@ djvu() {
     ' "$ZSH_DEJA_VU_HISTORY_FILE")
 
     if [[ -z "$output" ]]; then
-        print "djvu: No history found for: $target_dir"
+        printf "djvu: No history found for: %s\n" "$target_dir"
     else
-        print "--- Déjà Vu for $dir_label ($target_dir) ---"
-        #
-        # THE FIX IS HERE:
-        # We use 'printf "%s"' instead of 'print -r' because it's
-        # the POSIX-standard way to print a variable's contents
-        # without any magic option-parsing.
-        #
+        printf "--- Déjà Vu for %s (%s) ---\n" "$dir_label" "$target_dir"
+        # Use 'printf' to safely print the output variable
         printf "%s" "$output" | nl -b a -w 6
     fi
 }
@@ -102,13 +97,13 @@ djvu() {
 ##
 djvi() {
     if ! command -v fzf &>/dev/null; then
-        print "zsh-deja-vu: Error: fzf (fuzzy finder) is not installed."
-        print "Please install fzf to use the 'djvi' command."
+        printf "%s\n" "zsh-deja-vu: Error: fzf (fuzzy finder) is not installed."
+        printf "%s\n" "Please install fzf to use the 'djvi' command."
         return 1
     fi
 
     if [[ ! -f "$ZSH_DEJA_VU_HISTORY_FILE" ]]; then
-        print "zsh-deja-vu: No history logged yet."
+        printf "%s\n" "zsh-deja-vu: No history logged yet."
         return 1
     fi
 
