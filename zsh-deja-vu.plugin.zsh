@@ -84,8 +84,13 @@ djvu() {
         print "djvu: No history found for: $target_dir"
     else
         print "--- Déjà Vu for $dir_label ($target_dir) ---"
-        # Pipe the output to `nl` (number lines) to look like 'history'
-        print -r -- "$output" | nl -b a -w 6
+        #
+        # THE FIX IS HERE:
+        # We use 'printf "%s"' instead of 'print -r' because it's
+        # the POSIX-standard way to print a variable's contents
+        # without any magic option-parsing.
+        #
+        printf "%s" "$output" | nl -b a -w 6
     fi
 }
 
