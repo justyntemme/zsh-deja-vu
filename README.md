@@ -27,7 +27,7 @@ A Zsh plugin that logs and retrieves command history based on the directory it w
 
     **Oh My Zsh:**
     ```zsh
-    git clone [https://github.com/YOUR_USERNAME/zsh-deja-vu.git](https://github.com/YOUR_USERNAME/zsh-deja-vu.git) \
+    git clone [https://github.com/justyntemme/zsh-deja-vu.git](https://github.com/justyntemme/zsh-deja-vu.git) \
       ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-deja-vu
     ```
 
@@ -44,7 +44,7 @@ A Zsh plugin that logs and retrieves command history based on the directory it w
 
 1.  Clone this repository somewhere:
     ```zsh
-    git clone [https://github.com/YOUR_USERNAME/zsh-deja-vu.git](https://github.com/YOUR_USERNAME/zsh-deja-vu.git) \
+    git clone [https://github.com/justyntemme/zsh-deja-vu.git](https://github.com/justyntemme/zsh-deja-vu.git) \
       ~/.zsh/zsh-deja-vu
     ```
 
