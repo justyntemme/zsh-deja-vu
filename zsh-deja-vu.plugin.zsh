@@ -108,18 +108,19 @@ djvi() {
     fi
 
     # Use fzf to select a command.
-    # --tac: Show most recent (bottom of file) first.
-    # --preview: Show just the command (strip the path prefix) in the preview window.
-    # --query="$LBUFFER": Pre-fill fzf with whatever you've already typed.
+    # We use fzf's own --tac flag to reverse the input,
+    # removing the dependency on the 'tac' command (which is not on macOS).
+    # Input is redirected from the history file at the end.
     local selected_line
     selected_line=$(
-        tac "$ZSH_DEJA_VU_HISTORY_FILE" | fzf \
+        fzf --tac \
             --height 40% \
             --border \
             --preview="echo {} | sed 's/^[^:]*://'" \
             --preview-window="top,70%" \
             --prompt="DejaVu> " \
-            --query="$LBUFFER"
+            --query="$LBUFFER" \
+            < "$ZSH_DEJA_VU_HISTORY_FILE"
     )
 
     # If a line was selected (fzf didn't exit empty)
