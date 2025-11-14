@@ -85,7 +85,7 @@ djvu() {
     else
         printf "--- Déjà Vu for %s (%s) ---\n" "$dir_label" "$target_dir"
         # Use 'printf' to safely print the output variable
-        printf "%s" "$output" | nl -b a -w 6
+        printf "%s\n" "$output" | nl -b a -w 6
     fi
 }
 
